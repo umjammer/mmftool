@@ -1,0 +1,26 @@
+Kukeiha
+
+LFO	0
+ALG	1
+PAN	16(OFF)
+
+Op1
+
+M	1
+DT	2?
+AR	15
+DR	0
+SR	0
+RR	15
+SL	10
+TL	0
+KSL	0
+DAM	0
+DVB	0
+FB	0
+WS	6
+
+Flags OFF
+
+
+Op2=OFF

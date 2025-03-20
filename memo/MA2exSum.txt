@@ -1,0 +1,88 @@
+MA-1,2 MMF VOICE EXCLUSIVE ANALYSIS
+
+All0/Op2AR=1
+43 03 00 00 59 00 01 00 00 00 00 00 00 00 10 00 00 F7
+LFO3
+               C0
+FB1
+               08
+FB2
+               10
+FB7
+               38
+ALG1
+               01
+ML15
+                     F0
+KSL3
+                              03
+TL63
+                              FC
+AR15
+                           F0
+DR15
+                        0F
+SL15
+                           0F
+RR15
+                        F0
+WS7
+                                 07
+DVB3
+                                 C0
+DAM3
+                                 30
+
+43 03 00 00 59 00 01 00 00 00 00 00 00 00 10 00 00 F7
+VIB
+                     08
+EGT
+                     04
+SUS
+                     02
+KSR
+                     01
+AM
+                                 08
+
+===VOICE/OP1 SUMMARY===
+					   No BM?Pc       <----OP.1----> <--
+	00	FF F0 12 43 03 00 00 59 00 01 00 00 00 00 00 00
+		--OP.2---->
+	10	00 10 00 00 F7
+
+LFO	00	XX XX XX XX XX XX XX XX nX XX XX XX XX XX XX XX		LL000000
+FB	00	XX XX XX XX XX XX XX XX nn XX XX XX XX XX XX XX		00FFF000
+ALG	00	XX XX XX XX XX XX XX XX Xn XX XX XX XX XX XX XX
+
+MUL	00	XX XX XX XX XX XX XX XX XX XX nX XX XX XX XX XX
+KSL	00	XX XX XX XX XX XX XX XX XX XX XX XX XX Xn XX XX
+TL	00	XX XX XX XX XX XX XX XX XX XX XX XX XX nn XX XX		TTTTTT00
+AR	00	XX XX XX XX XX XX XX XX XX XX XX XX nX XX XX XX
+DR	00	XX XX XX XX XX XX XX XX XX XX XX Xn XX XX XX XX
+SL	00	XX XX XX XX XX XX XX XX XX XX XX XX Xn XX XX XX
+RR	00	XX XX XX XX XX XX XX XX XX XX XX nX XX XX XX XX
+WS	00	XX XX XX XX XX XX XX XX XX XX XX XX XX XX Xn XX
+DVB	00	XX XX XX XX XX XX XX XX XX XX XX XX XX XX nX XX		VV000000
+DAM	00	XX XX XX XX XX XX XX XX XX XX XX XX XX XX nX XX		00AA0000
+VIB	00	XX XX XX XX XX XX XX XX XX XX Xn XX XX XX XX XX		8
+EGT	00	XX XX XX XX XX XX XX XX XX XX Xn XX XX XX XX XX		4
+SUS	00	XX XX XX XX XX XX XX XX XX XX Xn XX XX XX XX XX		2
+KSR	00	XX XX XX XX XX XX XX XX XX XX Xn XX XX XX XX XX		1
+AM	00	XX XX XX XX XX XX XX XX XX XX XX XX XX XX Xn XX		8
+
+--------==========---------
+===OP2 SUMMARY===
+	00	FF F0 12 43 03 00 00 59 00 01 00 00 00 00 00 00
+	10	00 10 00 00 F7
+
+MUL	00	XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX nX
+KSL	10	XX XX Xn XX XX
+TL	10	XX XX nn XX XX	TTTTTT00
+AR	10	XX nX XX XX XX
+DR	10	Xn XX XX XX XX
+SL	10	XX Xn XX XX XX
+RR	10	nX XX XX XX XX
+WS	10	XX XX XX Xn XX
+DVB	10	XX XX XX nX XX	VV000000
+DAM	10	XX XX XX nX XX	00AA0000

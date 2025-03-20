@@ -1,0 +1,581 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// ∆≠∞ƒ◊Ÿ resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(932)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EXIT                 "Close this application..."
+    ID_OPENSMAF             "Open SMAF file."
+    ID_ABOUT                "About this software..."
+    ID_HELPINDEX            "Open the help."
+    ID_PLAY                 "Play SMAFimage with MaSound_Play()."
+    ID_STOP                 "Stop playing(emu and midi)"
+    ID_CLOSE                "Close current SMAF file."
+    ID_REWIND               "Go to 0ms"
+    ID_DETAILWND            "Show detail window. You can view raw events."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_MIDIPLAY             "Play events with SetMidiMsg()."
+    ID_MIDIRESET            "Send (SMAF's)MIDI reset command."
+    ID_COMPILESMAF          "Compile events to SMAF(on memory)."
+    ID_SAVESMAF             "Save SMAF on memory image."
+    ID_NEWSMAF              "Create new SMAF on memory."
+    ID_TOGGLENIAGARA        "Toggle NiagaraTouch mode.(Cherry-like)"
+    ID_TOGGLERO             "Toggle read-only mode."
+    ID_TOGGLENP             "Toggle preview on click on piano roll."
+    ID_EIINSERTAFTER        "Insert a new event after selected event."
+    ID_EIDELETE             "Delete the selected event."
+    ID_EIEDIT               "Edit the selected event."
+    ID_EIINSERTBEFORE       "Insert a new event before selected event."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_PRSCROLLTO           "Scroll to top of selected event."
+    ID_PRDELETE             "Delete the selected event."
+END
+
+#endif    // ∆≠∞ƒ◊Ÿ resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// ì˙ñ{åÍ resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
+#ifdef _WIN32
+LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
+#pragma code_page(932)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 2007,3,14,1
+ PRODUCTVERSION 0,0,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x9L
+#else
+ FILEFLAGS 0x8L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "041104b0"
+        BEGIN
+            VALUE "Comments", "View, Play and Edit SMAF(MMF file)!\0"
+            VALUE "CompanyName", "Murachue\0"
+            VALUE "FileDescription", "mmftool main program file\0"
+            VALUE "FileVersion", "2007, 3, 14, 1\0"
+            VALUE "InternalName", "mmftool\0"
+            VALUE "LegalCopyright", "Copyright (C) 2007 Murachue (http://murachue.ddo.jp/)\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "mmftool.exe\0"
+            VALUE "PrivateBuild", "MMFTool/â¸ñºàƒïÂèWíÜ!!\0"
+            VALUE "ProductName", "MMFTool\0"
+            VALUE "ProductVersion", "0, 0, 0, 1\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x411, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUT DIALOG DISCARDABLE  0, 0, 143, 99
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About this software..."
+FONT 9, "ÇlÇr ÇoÉSÉVÉbÉN"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,90,80,49,14
+    LTEXT           "M",IDC_STATIC,30,5,8,8
+    ICON            IDI_MAIN,IDC_STATIC,5,5,20,20,SS_SUNKEN
+    LTEXT           "M",IDC_STATIC,40,15,8,8
+    LTEXT           "F",IDC_STATIC,50,25,8,8
+    LTEXT           "T",IDC_STATIC,60,35,8,8
+    LTEXT           "o",IDC_STATIC,70,45,8,8
+    LTEXT           "o",IDC_STATIC,80,55,8,8
+    LTEXT           "l",IDC_STATIC,90,65,8,8
+    RTEXT           "by Murachue",IDC_STATIC,100,35,38,8
+    CTEXT           "for MA-3",IDC_STATIC,105,50,28,8
+    RTEXT           "Version 0000.00.00.0",IDC_VERSION,76,20,60,8
+    RTEXT           "PianoRoll SMAF Sequencer",IDC_STATIC,55,5,81,8
+    LTEXT           "M5_EmuSmw5.dll",IDC_STATIC,5,55,50,8
+    LTEXT           "M5_EmuHw.dll",IDC_STATIC,5,75,42,8
+    LTEXT           "Version 0.0.0.0",IDC_SMW5VERSION,10,65,43,8
+    LTEXT           "Version 0.0.0.0",IDC_HWVERSION,10,85,43,8
+END
+
+IDD_SOUNDEDITOR DIALOG DISCARDABLE  0, 0, 259, 275
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "SoundEditor: Track0"
+FONT 9, "ÇlÇr ÇoÉSÉVÉbÉN"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,150,255,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,205,255,50,14
+    CONTROL         "Tab1",IDC_TYPE,"SysTabControl32",0x0,5,20,250,230
+    LTEXT           "Bank MSB",IDC_STATIC,5,5,32,8
+    LTEXT           "Bank LSB",IDC_STATIC,70,5,30,8
+    LTEXT           "Pch",IDC_STATIC,135,5,12,8
+    EDITTEXT        IDC_BM,40,5,25,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_BL,105,5,25,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_PC,150,5,25,12,ES_AUTOHSCROLL | ES_NUMBER
+END
+
+IDD_SETABFM DIALOG DISCARDABLE  0, 0, 247, 221
+STYLE DS_CONTROL | WS_CHILD
+FONT 9, "MS UI Gothic"
+BEGIN
+    CONTROL         "Slider1",IDC_TLFO,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,95,5,50,10
+    CONTROL         "Panpot",IDC_PE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,
+                    20,36,10
+    CONTROL         "Slider1",IDC_TPAN,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,95,20,50,10
+    CONTROL         "Slider1",IDC_TALG,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,95,35,50,10
+    EDITTEXT        IDC_DAN,60,50,30,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_DSN,150,50,30,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Tab1",IDC_OP,"SysTabControl32",0x0,5,65,235,15
+    CONTROL         "Slider1",IDC_TMULTI,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,90,50,10
+    CONTROL         "Slider1",IDC_TDT,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,104,50,10
+    CONTROL         "Slider1",IDC_TAR,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,120,50,10
+    CONTROL         "Slider1",IDC_TDR,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,134,50,10
+    CONTROL         "Slider1",IDC_TSR,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,149,50,10
+    CONTROL         "Slider1",IDC_TRR,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,165,50,10
+    CONTROL         "Slider1",IDC_TSL,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,179,50,10
+    CONTROL         "Slider1",IDC_TTL,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,195,50,10
+    CONTROL         "Slider1",IDC_TKSL,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,185,91,50,10
+    CONTROL         "AM",IDC_EAM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,120,
+                    105,26,10
+    CONTROL         "Slider1",IDC_TDAM,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,185,105,50,10
+    CONTROL         "VB",IDC_EVB,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,120,
+                    121,25,10
+    CONTROL         "Slider1",IDC_TEAM,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,185,121,50,10
+    CONTROL         "Slider1",IDC_TFB,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,185,135,50,10
+    CONTROL         "Slider1",IDC_TWS,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,185,151,50,10
+    CONTROL         "XOF",IDC_XOF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,120,
+                    170,29,10
+    CONTROL         "SUS",IDC_SUS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,120,
+                    180,29,10
+    CONTROL         "KSR",IDC_KSR,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,120,
+                    190,29,10
+    EDITTEXT        IDC_LFO,60,5,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_PAN,60,20,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_ALG,60,35,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_AR,30,120,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_DR,30,134,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_SR,30,149,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_RR,30,165,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_MULTI,30,90,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_DT,30,104,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_TL,30,195,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_KSL,150,91,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_DAM,150,105,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_DVB,150,121,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_FB,150,135,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_WS,150,151,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    LTEXT           "Drum assign Note",IDC_STATIC,5,50,54,8
+    LTEXT           "Drum sound Note",IDC_STATIC,95,50,52,8
+    LTEXT           "AR",IDC_STATIC,10,120,10,8
+    LTEXT           "DR",IDC_STATIC,10,134,10,8
+    LTEXT           "SR",IDC_STATIC,10,149,10,8
+    LTEXT           "RR",IDC_STATIC,10,165,10,8
+    LTEXT           "DT",IDC_STATIC,10,106,10,8
+    LTEXT           "TL",IDC_STATIC,10,195,8,8
+    LTEXT           "Multi",IDC_STATIC,10,90,15,8
+    LTEXT           "KSL",IDC_STATIC,120,91,12,8
+    LTEXT           "FB",IDC_STATIC,120,135,10,8
+    LTEXT           "WS",IDC_STATIC,120,151,10,8
+    LTEXT           "LFO",IDC_STATIC,5,5,13,8
+    LTEXT           "Algorithm",IDC_STATIC,5,35,29,8
+    GROUPBOX        "",IDC_STATIC,5,80,235,135
+    EDITTEXT        IDC_SL,30,179,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    LTEXT           "SL",IDC_STATIC,10,179,8,8
+END
+
+IDD_SETABPCM DIALOG DISCARDABLE  0, 0, 247, 161
+STYLE DS_CONTROL | WS_CHILD
+FONT 9, "ÇlÇr ÇoÉSÉVÉbÉN"
+BEGIN
+    CONTROL         "Slider1",IDC_TLFO,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,95,5,50,10
+    CONTROL         "Panpot",IDC_PE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,5,
+                    20,36,10
+    CONTROL         "Slider1",IDC_TPAN,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,95,20,50,10
+    EDITTEXT        IDC_DAN,60,35,30,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_WID,180,5,30,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "ROM",IDC_RM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,215,5,
+                    30,10
+    EDITTEXT        IDC_LP,180,20,30,12,ES_AUTOHSCROLL | ES_NUMBER
+    EDITTEXT        IDC_EP,180,35,30,12,ES_AUTOHSCROLL | ES_NUMBER
+    CONTROL         "Slider1",IDC_TAR,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,62,50,10
+    CONTROL         "Slider1",IDC_TDR,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,76,50,10
+    CONTROL         "Slider1",IDC_TSR,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,91,50,10
+    CONTROL         "Slider1",IDC_TRR,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,105,50,10
+    CONTROL         "Slider1",IDC_TSL,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,122,50,10
+    CONTROL         "Slider1",IDC_TTL,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,65,135,50,10
+    CONTROL         "AM",IDC_EAM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,120,
+                    60,26,10
+    CONTROL         "Slider1",IDC_TDAM,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,185,60,50,10
+    CONTROL         "VB",IDC_EVB,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,120,
+                    75,25,10
+    CONTROL         "Slider1",IDC_TEAM,"msctls_trackbar32",TBS_BOTH | 
+                    TBS_NOTICKS | WS_TABSTOP,185,75,50,10
+    CONTROL         "XOF",IDC_XOF,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,120,
+                    90,29,10
+    CONTROL         "SUS",IDC_SUS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,120,
+                    105,29,10
+    EDITTEXT        IDC_LFO,60,5,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_PAN,60,20,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_AR,30,60,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_DR,30,75,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_SL,30,120,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_SR,30,90,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_RR,30,105,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_TL,30,135,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_DAM,150,60,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    EDITTEXT        IDC_DVB,150,75,30,12,ES_AUTOHSCROLL | ES_READONLY | 
+                    ES_NUMBER
+    LTEXT           "Drum assign Note",IDC_STATIC,5,35,54,8
+    LTEXT           "LFO",IDC_STATIC,5,5,13,8
+    LTEXT           "AR",IDC_STATIC,10,60,10,8
+    LTEXT           "DR",IDC_STATIC,10,75,10,8
+    LTEXT           "SL",IDC_STATIC,10,120,8,8
+    LTEXT           "SR",IDC_STATIC,10,90,10,8
+    LTEXT           "RR",IDC_STATIC,10,105,10,8
+    LTEXT           "TL",IDC_STATIC,10,135,8,8
+    GROUPBOX        "",IDC_STATIC,5,50,235,105
+    LTEXT           "LP",IDC_STATIC,150,20,8,8
+    LTEXT           "EP",IDC_STATIC,150,35,9,8
+    LTEXT           "WaveID",IDC_STATIC,150,5,23,8
+END
+
+IDD_PROGRESS DIALOGEX 0, 0, 199, 27
+STYLE DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Converting SMAF to events..."
+FONT 9, "ÇlÇr ÇoÉSÉVÉbÉN"
+BEGIN
+    CONTROL         "Progress1",IDC_PROGRESS,"msctls_progress32",PBS_SMOOTH,
+                    5,5,135,15,WS_EX_TRANSPARENT
+    PUSHBUTTON      "Abort",IDCANCEL,145,5,50,14
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_MAIN                ICON    DISCARDABLE     "main.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAIN MENU DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl-N",                ID_NEWSMAF
+        MENUITEM "&Load SMAF\tCtrl-O",          ID_OPENSMAF
+        MENUITEM "&Reload SMAF\tCtrl-R",        ID_RELOAD
+        MENUITEM "&Reconvert SMAF(not implemented)", ID_RECONVERT, GRAYED
+        MENUITEM "&Close\tCtrl-W",              ID_CLOSE
+        MENUITEM "C&ompile SMAF to memory\tCtrl-M", ID_COMPILESMAF
+        MENUITEM "&Save memory SMAF\tCtrl-S",   ID_SAVESMAF
+        MENUITEM SEPARATOR
+        MENUITEM "Save settings to &INI Now!",  ID_SAVESETTINGS
+        MENUITEM SEPARATOR
+        MENUITEM "&Exit\tAlt-X",                ID_EXIT
+    END
+    POPUP "&Music"
+    BEGIN
+        MENUITEM "&EmuPlay\tF5",                ID_PLAY
+        MENUITEM "&MidiPlay\tF6",               ID_MIDIPLAY
+        MENUITEM "&Stop\tF7",                   ID_STOP
+        MENUITEM "&Rewind\tF8",                 ID_REWIND
+        MENUITEM "M&idiReset\tF9",              ID_MIDIRESET
+        MENUITEM SEPARATOR
+        MENUITEM "&NiagaraTouch",               ID_TOGGLENIAGARA
+        MENUITEM "Read&Only",                   ID_TOGGLERO
+        MENUITEM "&Don't preview",              ID_TOGGLENP
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "Visible Track Only:",         0, INACTIVE
+        MENUITEM SEPARATOR
+        MENUITEM "Track1(Silver)\t&1",          ID_VTRACK1
+        MENUITEM "Track2(Red)\t&2",             ID_VTRACK2
+        MENUITEM "Track3(Green)\t&3",           ID_VTRACK3
+        MENUITEM "Track4(Blue)\t&4",            ID_VTRACK4
+        MENUITEM "Track5(Yellow)\t&5",          ID_VTRACK5
+        MENUITEM "Track6(Cyan)\t&6",            ID_VTRACK6
+        MENUITEM "Track7(Purple)\t&7",          ID_VTRACK7
+        MENUITEM "Track8(White)\t&8",           ID_VTRACK8
+        MENUITEM "All\t&0",                     ID_VTRACKALL, MENUBARBREAK
+        MENUITEM SEPARATOR
+        MENUITEM "Track9(Black)\t&Q",           ID_VTRACK9
+        MENUITEM "Track10(DarkRed)\t&W",        ID_VTRACK10
+        MENUITEM "Track11(DarkGreen)\t&E",      ID_VTRACK11
+        MENUITEM "Track12(DarkBlue)\t&R",       ID_VTRACK12
+        MENUITEM "Track13(DarkYellow)\t&T",     ID_VTRACK13
+        MENUITEM "Track14(DarkCyan)\t&Y",       ID_VTRACK14
+        MENUITEM "Track15(DarkPurple)\t&U",     ID_VTRACK15
+        MENUITEM "Track16(Gray)\t&I",           ID_VTRACK16
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&Show detail...",             ID_DETAILWND
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&Index\tF1",                  ID_HELPINDEX
+        MENUITEM SEPARATOR
+        MENUITEM "&About...",                   ID_ABOUT
+    END
+END
+
+IDR_EVENTITEM MENU DISCARDABLE 
+BEGIN
+    MENUITEM "insert &Before",              ID_EIINSERTBEFORE
+    MENUITEM "insert &After",               ID_EIINSERTAFTER
+    MENUITEM SEPARATOR
+    MENUITEM "Set this event ""St&artItem""", ID_EISETSTART
+    MENUITEM "Set this event ""St&opItem""", ID_EISETSTOP
+    MENUITEM SEPARATOR
+    MENUITEM "&Edit",                       ID_EIEDIT
+    MENUITEM "&Delete",                     ID_EIDELETE
+END
+
+IDR_PIANOROLL MENU DISCARDABLE 
+BEGIN
+    MENUITEM "&Scroll to here",             ID_PRSCROLLTO
+    MENUITEM "Play(&Emu) from here",        ID_PRPLAYEMUHERE
+    MENUITEM "Play(&MIDI) from here",       ID_PRPLAYMIDIHERE
+    MENUITEM "&View only this track",       ID_PRONLYTRACK
+    MENUITEM SEPARATOR
+    MENUITEM "Set this event ""St&artItem""", ID_PRSETSTART
+    MENUITEM "Set this event ""St&opItem""", ID_PRSETSTOP
+    MENUITEM SEPARATOR
+    MENUITEM "&Delete",                     ID_PRDELETE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 136
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 92
+    END
+
+    IDD_SOUNDEDITOR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 252
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 268
+    END
+
+    IDD_SETABFM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 240
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 214
+    END
+
+    IDD_SETABPCM, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 240
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 154
+    END
+
+    IDD_PROGRESS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 192
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 20
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAIN ACCELERATORS DISCARDABLE 
+BEGIN
+    "D",            ID_DETAILWND,           VIRTKEY, CONTROL, NOINVERT
+    "F",            ID_CHECKCRC,            VIRTKEY, CONTROL, NOINVERT
+    "M",            ID_COMPILESMAF,         VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_NEWSMAF,             VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_OPENSMAF,            VIRTKEY, CONTROL, NOINVERT
+    "R",            ID_RELOAD,              VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_SAVESMAF,            VIRTKEY, CONTROL, NOINVERT
+    VK_F1,          ID_HELPINDEX,           VIRTKEY, NOINVERT
+    VK_F5,          ID_PLAY,                VIRTKEY, NOINVERT
+    VK_F6,          ID_MIDIPLAY,            VIRTKEY, NOINVERT
+    VK_F7,          ID_STOP,                VIRTKEY, NOINVERT
+    VK_F8,          ID_REWIND,              VIRTKEY, NOINVERT
+    VK_F9,          ID_MIDIRESET,           VIRTKEY, NOINVERT
+    "W",            ID_CLOSE,               VIRTKEY, CONTROL, NOINVERT
+    "X",            ID_EXIT,                VIRTKEY, ALT, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_MAINTB              BITMAP  DISCARDABLE     "maintb.bmp"
+IDB_LOGO                BITMAP  DISCARDABLE     "logo.bmp"
+#endif    // ì˙ñ{åÍ resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

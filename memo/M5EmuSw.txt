@@ -1,0 +1,94 @@
+{} = loop
+function(arg count)[params] = return code
+
+MaSound functions manual---
+EmuInitialize(?, ?, ?)
+ return 0: OK
+Initialize(0?, 10A8CB0?, 0?)
+ return 0: OK
+DeviceControl(?, ?, ?, ?)
+ return 0: OK
+Terminate(void)
+ return 0: OK
+
+Create(1?)
+ return: <= -1 = Bad
+
+MaSound functions flow---
+ EmuInitialize(3)[BB80, 2, 10A8C81] = 0
+  Initialize(3)[0, 10A8CB0, 0] = 0
+   DeviceControl(4)[D, 0, 0, 0] = 0
+   DeviceControl(4)[5, 2, 0, 0] = 0
+   DeviceControl(4)[6, 0, 0, 0] = 0
+   DeviceControl(4)[8, 2, 0, 0] = 0
+   DeviceControl(4)[9, 0, 0, 0] = 0
+  Terminate(0) = 0
+  Initialize(3)[0, 10A8CB0, 0] = 0
+   DeviceControl(4)[5, 2, 0, 0] = 0
+   DeviceControl(4)[8, 2, 0, 0] = 0
+   Create(1)[1] = 1?
+    DeviceControl(4)[5, 2, 0, 0] = 0
+    DeviceControl(4)[6, 0, 0, 0] = 0
+    DeviceControl(4)[8, 2, 0, 0] = 0
+    DeviceControl(4)[9, 0, 0, 0] = 0
+    <<play>>
+    {
+    Load(6)[1, file, filesize, 1, 4A5660, 0]=1
+    Control(5)[1, 1, 6, 0, 0]=1
+     Open(4)[1, 1, 0, 0]=0 = OK
+      Control(5)[1, 1, 6, 0, 0]=2
+      Control(5)[1, 1, 0, 10A5858, 0]=0
+      Control(5)[1, 1, 6, 0, 0]=2
+      Standby(3)[1, 1, 0]=0
+      Control(5)[1, 1, 6, 0, 0]=3
+      Control(5)[1, 1, 2, 12F59C, 0]=0
+      Control(5)[1, 1, 6, 0, 0]=3
+      Control(5)[1, 1, 1, 12F59C, 0]=0
+
+      (
+      <re-press start:>
+      Control(5)[1, 1, 6, 0, 0]=3
+      )
+      Control(5)[1, 1, 6, 0, 0]=3
+      Control(5)[1, 1, 1, 12F660, 0]=0
+      Control(5)[1, 1, 6, 0, 0]=3
+
+      Start(4)[1, 1, 1, 0]=0 = OK?
+      << PlayingLoop >>
+      {
+       Control(5)[1, 1, 6, 0, 0] = 4  3=End
+       Control(5)[1, 1, 4, 0, 0] = pos?
+       GetEmuInfo(1)[4] = 1 -> 0
+      }
+
+      (
+      << stop >>
+      Stop(3)[1, 1, 0] = 0
+      )
+
+      (
+      << set pianoroll pos >>
+      Control(5)[1, 1, 6, 0, 0] = 3
+      Seek(5)[1, 1, 89E4(pos), 0, 0] = 0
+      )
+
+      (
+      << Play other file >>
+      Control(5)[1, 1, 6, 0, 0] = 3;
+      Control(5)[1, 1, 6, 0, 0] = 3;
+      )
+
+     Close(3)[1, 1, 0] = 0
+     (
+     <<if: play other file>>
+     Control(5)[1, 1, 6, 0, 0] = 1
+     )
+    Unload(3)[1, 1, 0] = 0
+    (
+    << if play other file -> goto <play> >>
+    )
+    }
+   <<quit>>
+   Delete(1)[1] = 0
+  Terminate(0) = 0
+ EmuTerminate(0)...didn't return...?

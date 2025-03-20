@@ -1,0 +1,47 @@
+vm3 format
+
+endian: BIGENDIAN
+
+FMM3[chnksize]
+entry{
+0	WORD entry no
+2	BYTE? size(bank msb->op records end 0x34/0x24?,0x25) (msk...variable value!?)
+3	BYTE bank msb
+4	BYTE bank lsb (for normal: drum=0)
+5	BYTE pch#
+6	BYTE note# (for drum: normal inst.=0)
+7	BYTE type?(0:FM 1:PCM?)
+8	BYTE name[16]
+
+FM{
+	24	BYTE note to sound drum(normal inst.=0)
+	25	PPPPP001	P:Panpot
+	26	LLE00AAA	L:LFO	E:PE	A:ALG
+	27{
+		0	RRRRX0SK	R:SR	X:XOF	S:SUS	K:KSR
+		1	RRRRDDDD	R:RR	D:DR
+		2	AAAASSSS	A:AR	S:SL
+		3	TTTTTTKK	T:TL	K:KSL
+		4	aaaAvvvV	A:EAM	a:DAM	V:EVB	v:DVB
+		5	MMMM0DDD	M:Multi	D:DT
+		6	WWWWWFFF	W:WS	F:FB
+	} 7*4 = 28
+}31
+
+PCM{
+	24 WORD fs
+	26 PPPPP00E	P:Pan	E:PE
+	27 LL000000	L:LFO
+	28 SSSSX0S0	S:SR	X:XOF	S:SUS
+	29 RRRRDDDD	R:RR	D:DR
+	30 AAAASSSS	A:AR	S:SL
+	31 TTTTTT00	T:TL
+	32 0aaA0vvV	a:DAM	A:EAM	v:DVB	V:EVB
+	33 00000000
+	34 00000000
+	35 WORD LP
+	37 WORD EP
+	39 R0000nnn	R:RM	n:WaveID
+}16
+
+}FM=55 PCM=40 bytes 1 inst.

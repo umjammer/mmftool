@@ -1,0 +1,124 @@
+0x30 bytes exclusive
+	FM OP2/OP4
+
+<< Inst. Summary >>
+                      0  1  2  3  4  5  6  7  8  9  A  B  C  D  E
+		00000000  F0 43 79 07 7F 01 nn mm oo pp XX XX qq XX XX XX	nn=BankMSB	mm=BankLSB	oo=PcNo.	pp=NoteNo.(forDrum)	qq=DrumNoteAssign
+LFO a	00000000  XX XX XX XX XX XX XX XX XX XX XX mX XX XX nX XX	n |= a & 0x01 ? 4 : 0	m |= a & 0x02 ? 1 : 0
+Pan a	00000000  XX XX XX XX XX XX XX XX XX XX XX mX XX nn XX XX	nn |= a & 0x0F << 3	m |= a & 0x10 ? 2 : 0
+PE		00000000  XX XX XX XX XX XX XX XX XX XX XX XX XX XX nX XX	n |= PE ? 2 : 0
+Alg a	00000000  XX XX XX XX XX XX XX XX XX XX XX XX XX XX Xn XX	n |= a
+
+LFO 0-3
+Pan 0-31=15-Centered.
+PE  0/1=PanpotEnable
+Alg 0-7
+==============-------------==============-------------==================
+<< OP1 Summary >>
+		00000000  XX XX XX XX XX XX XX XX XX XX XX X1 XX XX XX 23
+		00000010  45 67 89 AX BC DE FG XX XX XX XX XX XX XX XX XX
+
+                                                    0  1  2  3  4
+AR a	00000000  XX XX XX XX XX XX XX XX XX XX XX Xm XX XX XX XX	m |= a & 0x08 ? 2 : 0
+RR a	00000000  XX XX XX XX XX XX XX XX XX XX XX Xm XX XX XX XX	m |= a & 0x08 ? 4 : 0
+SR a	00000000  XX XX XX XX XX XX XX XX XX XX XX Xm XX XX XX nX	m |= a & 0x08 ? 8 : 0	n = a & 0x07
+TL a	00000000  XX XX XX XX XX XX XX XX XX XX XX Xm XX XX XX XX	m |= a & 0x20 ? 1 : 0
+XOF		00000000  XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX Xn	n = XOF ? 8 : 0
+SUS		00000000  XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX Xn	n = SUS ? 2 : 0
+KSR		00000000  XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX Xn	n = KSR ? 1 : 0
+
+Exclusive Offset:  F 10 11 12 13 14 15 16 17 18 19 1A 1B 1C 1D 1E
+       Op.Offset:  5  6  7  8  9  A  B
+Multi a	00000010  XX XX XX mX XX nX XX XX XX XX XX XX XX XX XX XX	m=a & 0x08 ? 2 : 0	n=a & 0x07
+DT a	00000010  XX XX XX XX XX Xn XX XX XX XX XX XX XX XX XX XX	n = a
+AR a	00000010  XX nX XX XX XX XX XX XX XX XX XX XX XX XX XX XX	n = a & 0x07
+DR a	00000010  Xa XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX
+RR a	00000010  nX XX XX XX XX XX XX XX XX XX XX XX XX XX XX XX	n = a & 0x07
+SL a	00000010  XX Xa XX XX XX XX XX XX XX XX XX XX XX XX XX XX
+TL a	00000010  XX XX nn XX XX XX XX XX XX XX XX XX XX XX XX XX	nn |= a & 0x1F << 2
+KSL a	00000010  XX XX Xn XX XX XX XX XX XX XX XX XX XX XX XX XX	n |= a
+DAM a	00000010  XX XX XX XX nX XX XX XX XX XX XX XX XX XX XX XX	n |= a & 0x03 << 5
+DVB a	00000010  XX XX XX XX Xn XX XX XX XX XX XX XX XX XX XX XX	n |= a & 0x03 << 1
+FB a	00000010  XX XX XX XX XX XX Xn XX XX XX XX XX XX XX XX XX	n |= a
+WS a	00000010  XX XX XX mX XX XX nn XX XX XX XX XX XX XX XX XX	m |= a & 0x10 ? 1 : 0	nn = a & 0x0F << 3
+
+EAM		00000010  XX XX XX XX nX XX XX XX XX XX XX XX XX XX XX XX	n = EAM ? 1 : 0
+EVB		00000010  XX XX XX XX Xn XX XX XX XX XX XX XX XX XX XX XX	n = EVB ? 1 : 0
+==============-------------==============-------------==================
+<< OP2 Summary >>
+		00000010  XX XX XX X1 XX XX XX 23 45 67 89 AX BC DE FG XX
+
+Multi a	00000010  XX XX XX XX XX XX XX XX XX XX XX mX XX nX XX XX	n |= a & 0x07 << 4	m |= a & 0x08 ? 2 : 0
+DT a	00000010  XX XX XX XX XX XX XX XX XX XX XX XX XX Xn XX XX	n |= a
+AR a	00000010  XX XX XX Xm XX XX XX XX XX nX XX XX XX XX XX XX	n |= a & 0x07	m |= a & 0x08 ? 2 : 0
+DR a	00000010  XX XX XX XX XX XX XX XX Xn XX XX XX XX XX XX XX	n |= a
+SR a	00000010  XX XX XX Xm XX XX XX nX XX XX XX XX XX XX XX XX	n |= a & 0x07	m |= a & 0x08 ? 8 : 0
+RR a	00000010  XX XX XX Xm XX XX XX XX nX XX XX XX XX XX XX XX	n |= a & 0x07	m |= a & 0x08 ? 4 : 0
+SL a	00000010  XX XX XX XX XX XX XX XX XX Xn XX XX XX XX XX XX	n |= a
+TL a	00000010  XX XX XX Xm XX XX XX XX XX XX nn XX XX XX XX XX	nn |= a & 0x1F << 2	m |= a & 0x20 ? 1 : 0
+KSL a	00000010  XX XX XX XX XX XX XX XX XX XX Xn XX XX XX XX XX	n |= a
+DAM a	00000010  XX XX XX XX XX XX XX XX XX XX XX XX nX XX XX XX	n |= a << 5
+DVB a	00000010  XX XX XX XX XX XX XX XX XX XX XX XX Xn XX XX XX	n |= a << 1
+WS a	00000010  XX XX XX XX XX XX XX XX XX XX XX mX XX XX nn XX	nn |= a & 0x0F << 3	m |= a & 0x10 ? 1 : 0
+XOF		00000010  XX XX XX XX XX XX XX X8 XX XX XX XX XX XX XX XX
+SUS		00000010  XX XX XX XX XX XX XX X2 XX XX XX XX XX XX XX XX
+KSR		00000010  XX XX XX XX XX XX XX X1 XX XX XX XX XX XX XX XX
+EAM		00000010  XX XX XX XX XX XX XX XX XX XX XX XX 1X XX XX XX
+EVB		00000010  XX XX XX XX XX XX XX XX XX XX XX XX X1 XX XX XX
+==============-------------==============-------------==================
+See: http://www.imelo.net/oto/allow/pc/thru_notes.html (http://www.imelo.net/oto/allow/pc/thru_notes_ATS.html ?)
+Multi(0-15)=Multiple
+DT(0-7)=DeTune
+AR(0-15)=Attack Rate
+DR(0-15)=Decay Rate?
+SR(0-15)=Sustain Rate?
+RR(0-15)=Release Rate
+SL(0-15)=Sustain Level
+TL(0-63)=Total Level
+KSL(0-3)=KeyScale Level
+DAM(0-3)=Depth of AM
+DVB(0-3)=Depth of Vibrato
+FB(0-7)=FeedBack, only feedback device.
+WS(0-31)=WaveStyle
+XOF(0/1) = Don't kill sound(Don't RR)
+SUS(0/1) = Sustain???
+KSR(0/1) = KeyScale Rate
+EAM(0/1) = Enable AM(Tremolo)
+EVB(0/1) = Enable Vibrato
+==============-------------==============-------------==================
+ALG List
+0:========
+v-+
+->1->2->out
+1:========
+v-+
+->1->+->out
+  2--^
+2:========
+v-+
+->1->+->out
+  2--^
+v-+  |
+->3--^
+  4--^
+3:========
+v-+
+->1----+-4->out
+  2->3-^
+4:========
+v-+
+->1->2->3->4->out
+5:========
+v-+
+->1->2-+->out
+v-+    |
+->3->4-^
+6:========
+v-+
+->1-------+->out
+  2->3->4-^
+7:========
+v-+
+->1--+->out
+2->3-^
+   4-^

@@ -1,0 +1,71 @@
+そーらーを自由にー飛ーびたーいなー
+
+SMFインポート
+イベントリストで選択してSpace->一斉に編集できるような一行ウィンドウ。
+	[time][tr]<Event  v>
+	                    [Velo](Note)
+						[Value](PB)
+						<Type v>[value](CC)
+						<Program v>(PC)
+						[XX XX XX...](Exclusive)
+ヘキサエディタコントロール?(上のExclusive問題)
+	Cherryの形式でもいいね。
+OK Emuの初期パラメータもINIで指定できるように
+	Vol,KyPitch,Tempo.
+OK テンポでC0000094(DivideByZero)するからクリックの方も制御いれとけ
+OK TempoCheckerとPianoRollの融合
+	拍グリッドとか。
+再生開始時にTempoCheckerのMetronomeを同期とかほしい?
+OK PianoRollのDuration/Gate Base Grid実装
+	移動中/ゲート変更中だけ表示とか。通常状態で表示した場合は見にくい。
+DVAとかEventDensityチェッカーつけないと。
+	EventDensityって何基準にするんだ。
+OK DBase/GBaseの動的変更したいなー
+	ちゃんとAlignも変更するように!
+	非推奨
+
+OK PCM送ってもエラーにならないような方法は?->ATS-MA5に聞け!
+	リセットコマンド追加した
+
+メモ/VoiceSetExclusive Size:
+MA-3
+FM=2OP:1F/4OP:2F
+PCM=1E
+MA-5
+FM=2OP:1C/4OP:2A
+PCM=1B
+ALon[forEmuSmw5]=FM-2OP:0x37/FM4OP:0x45/PCM,Noise:0x36
+->ALsize=+27(0x1B)
+
+Track16までっていう仮定は危うい。
+	32とかAll64あるし。
+	でもMIDIじゃ16までしか対応してねえええええ
+
+OK? EmuSmw5とsmafの癒着がやばい。
+    同様にmainの癒着がやばい。
+    cuimodeのinclude見るとひどい感じ。
+    一度モジュール分けの整理しなきゃ。
+		3/7:したけど。ひどい感じ。
+
+えせ着うたがLEDかVibか知らんが2note以上のがあるから要チェック
+
+*Velo,PBの編集ウィンドウ(上記)
+OK? MA-5の音色サポート(微妙)
+*音色編集[テーブル使うか](ダイアログリソースはできてる...?)
+
+OK イベントリストのオーナードロー->選択は斜め線化
+	斜め線見にくいので廃止
+OK INIでフォント指定、グリッド色など。
+ノート編集した場合EOSが更新されてないのでEOSの部分も更新するように
+
+lstrdupでも作る
+	strbytesで確保->lstrcpy->ポインタ返す
+
+WM_SETOPTIONSTRINGがメモリリークしてるっぽいので修正しろ
+	内部でlstrdupした値を保持->書き換え時free>lstrdupすること。
+	Destroy時にfreeお忘れ無く
+SMAFCompileでsmaf->start,stopをサポートせよ
+	MspI?ね
+SMAFロード時0x8nを0x9nに変換、コンパイル時0x9nでVel同じのを0x8n化
+	Vel編集しやすいしプログラム簡略化できるしいいね！
+SMAFロード後smaf->start->timeまで移動
