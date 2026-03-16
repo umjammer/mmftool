@@ -4,6 +4,16 @@ mmfplayer powered by M5_Emu*.dll for cross compiling on macos.
 
 ## Install
 
+### build
+
+```shell
+$ brew intall mingw-w64
+$ git clone ...
+$ make
+```
+
+## Usage
+
 ### prepare
 
 ```
@@ -12,23 +22,16 @@ M5_EmuHw.dll
 M5_EmuSmw5.dll
 ```
 
-### build
+### run
 
 ```shell
-$ brew intall mingw-w64 wine-crossover
-$ git clone ...
-$ make
-```
-
-## Usage
-
-```shell
+$ brew intall wine-crossover
 $ MMFTOOL_MASTER_VOLUME=20 wine mmftool.exe
 ```
 
 ### environment variable
 
-- `MMFTOOL_MASTER_VOLUME` ... 0 to 127
+- `MMFTOOL_MASTER_VOLUME` ... player volume 0 to 127
 
 ## References
 
