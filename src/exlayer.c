@@ -144,7 +144,7 @@ static UINT setExclusiveFMAll(BYTE* data, CHPARAM* chp, OPPARAM* opps)
 	return size;
 }
 
-static UINT setExclusivePCMAll(BYTE* data, CHPARAM* chp, OPPARAM* opp)
+UINT setExclusivePCMAll(BYTE* data, CHPARAM* chp, OPPARAM* opp)
 {
 	UINT i;
 

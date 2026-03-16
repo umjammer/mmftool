@@ -169,7 +169,7 @@ LPCTSTR basename(LPCTSTR str)
 
 	while(*str)
 	{
-		if(*str == '\\')
+		if(*str == '\\' || *str == '/')
 			last = str + 1;
 		str = CharNext(str);
 	}
@@ -219,13 +219,13 @@ BOOL addEndYen(LPTSTR str)
 
 	for(p = str, chrs = 0, lastyen = 0; *p; p = CharNext(p), chrs++)
 	{
-		if(*p == TEXT('\\'))
+		if(*p == TEXT('/'))
 			lastyen = chrs;
 	}
 
 	if(chrs - 1 > lastyen)
 	{
-		lstrcat(str, TEXT("\\"));
+		lstrcat(str, TEXT("/"));
 		return TRUE;
 	}
 

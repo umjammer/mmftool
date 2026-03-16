@@ -1448,12 +1448,20 @@ SMAF* LoadSmaf(LPCTSTR fname)
 	SMAF* smaf = NULL;
 	HANDLE hf = INVALID_HANDLE_VALUE;
 	DWORD read;
+	LPCTSTR base;
+    const TCHAR *p;
 
 	if(!(smaf = CreateSmaf(0, 0)))	// 後で変換するので0でOK。
 		goto Error;
 
 	lstrcpy(smaf->path, fname);
-	lstrcpy(smaf->name, basename(fname));
+	//lstrcpy(smaf->name, basename(fname));
+    base = fname;
+    for (p = fname; *p; p++) {
+        if (*p == '\\' || *p == '/' || *p == ':')
+            base = p + 1;
+    }
+    lstrcpy(smaf->name, base);
 
 	if((hf = CreateFile(fname, GENERIC_READ, FILE_SHARE_READ, NULL, OPEN_EXISTING, 0, NULL)) == INVALID_HANDLE_VALUE)
 	{

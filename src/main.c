@@ -7,7 +7,7 @@
 #include <windows.h>
 #include <commctrl.h>
 #include "runtime.h"
-#include "..\res\resource.h"
+#include "../res/resource.h"
 #include "bit.h"
 #include "smaf.h"
 #include "emusmw5.h"
@@ -84,78 +84,78 @@ static struct tagIniEntries
 	LPCTSTR key;
 	UINT type;
 	UINT num;
-	int* val;
-	int def;	// value or pointer to array
+	void* val;
+	void* def;	// value or pointer to array
 
 	UINT bufsize;	// For IEV_STRING
 }IniEntries[] = {
 	// Main
-	{	"Settings",	"DrawFunc",					IEV_INTEGER,	1,	&MainOption.DrawFunc,				2},
-	{	"Settings",	"FollowPlay",				IEV_INTEGER,	1,	&MainOption.FollowPlay,				0},
-	{	"Settings",	"FollowSpace",				IEV_INTEGER,	1,	&MainOption.FollowSpace,			-100},
-	{	"Settings",	"PlayVisibleOnly",			IEV_INTEGER,	1,	&MainOption.PlayVisibleOnly,		FALSE},
-	{	"Settings",	"DontPreview",				IEV_INTEGER,	1,	&MainOption.DontPreview,			FALSE},
-	{	"Settings",	"EventListViewSize",		IEV_INTEGER,	1,	&MainOption.EventListViewSize,		200},
-	{	"Settings",	"PlayPosAlignByMagScale",	IEV_INTEGER,	1,	&MainOption.PlayPosAlignByMagScale,	FALSE},
+	{	"Settings",	"DrawFunc",					IEV_INTEGER,	1,	&MainOption.DrawFunc,				(void*)2},
+	{	"Settings",	"FollowPlay",				IEV_INTEGER,	1,	&MainOption.FollowPlay,				(void*)0},
+	{	"Settings",	"FollowSpace",				IEV_INTEGER,	1,	&MainOption.FollowSpace,			(void*)-100},
+	{	"Settings",	"PlayVisibleOnly",			IEV_INTEGER,	1,	&MainOption.PlayVisibleOnly,		(void*)FALSE},
+	{	"Settings",	"DontPreview",				IEV_INTEGER,	1,	&MainOption.DontPreview,			(void*)FALSE},
+	{	"Settings",	"EventListViewSize",		IEV_INTEGER,	1,	&MainOption.EventListViewSize,		(void*)200},
+	{	"Settings",	"PlayPosAlignByMagScale",	IEV_INTEGER,	1,	&MainOption.PlayPosAlignByMagScale,	(void*)FALSE},
 
-	{	"Settings",	"DefaultDurationBase",		IEV_INTEGER,	1,	&MainOption.DefaultDurationBase,	4},
-	{	"Settings",	"DefaultGateBase",			IEV_INTEGER,	1,	&MainOption.DefaultGateBase,		4},
+	{	"Settings",	"DefaultDurationBase",		IEV_INTEGER,	1,	&MainOption.DefaultDurationBase,	(void*)4},
+	{	"Settings",	"DefaultGateBase",			IEV_INTEGER,	1,	&MainOption.DefaultGateBase,		(void*)4},
 
-	{	"Settings",	"RefreshRate",				IEV_INTEGER,	1,	&MainOption.RefreshRate,			50},
-	{	"Settings",	"xDetailRefreshRate",		IEV_INTEGER,	1,	&MainOption.DetailRefreshRate,		100},
+	{	"Settings",	"RefreshRate",				IEV_INTEGER,	1,	&MainOption.RefreshRate,			(void*)50},
+	{	"Settings",	"xDetailRefreshRate",		IEV_INTEGER,	1,	&MainOption.DetailRefreshRate,		(void*)100},
 
-	{	"Settings",	"EventListFontFace",		IEV_STRING,		1,	(int*)MainOption.EventListFontFace,	(DWORD)(LPCTSTR)"ＭＳ ゴシック",	LF_FACESIZE},
-	{	"Settings",	"EventListFontSize",		IEV_INTEGER,	1,	&MainOption.EventListFontSize,		12},
+	{	"Settings",	"EventListFontFace",		IEV_STRING,		1,	MainOption.EventListFontFace,		(void*)"ＭＳ ゴシック",	LF_FACESIZE},
+	{	"Settings",	"EventListFontSize",		IEV_INTEGER,	1,	&MainOption.EventListFontSize,		(void*)12},
 
-	{	"Settings",	"TrackColors",				IEV_INTEGER,	16,	MainOption.TrackColors,				(DWORD)DefaultTrackColors},
-	{	"Settings",	"TrackTextColors",			IEV_INTEGER,	16,	MainOption.TrackTextColors,			(DWORD)DefaultTrackTextColors},
+	{	"Settings",	"TrackColors",				IEV_INTEGER,	16,	MainOption.TrackColors,				(void*)DefaultTrackColors},
+	{	"Settings",	"TrackTextColors",			IEV_INTEGER,	16,	MainOption.TrackTextColors,			(void*)DefaultTrackTextColors},
 
 	// Emu
-	{	"Settings",	"Emu.Tempo",				IEV_INTEGER,	1,	&MainOption.EmuOption.Tempo,		100},
+	{	"Settings",	"Emu.Tempo",				IEV_INTEGER,	1,	&MainOption.EmuOption.Tempo,		(void*)100},
 	// TODO: make atoi
-	{	"Settings",	"Emu.Keypitch",				IEV_INTEGER,	1,	&MainOption.EmuOption.Keypitch,		0},
-	{	"Settings",	"Emu.Volume",				IEV_INTEGER,	1,	&MainOption.EmuOption.Volume,		127},
+	{	"Settings",	"Emu.Keypitch",				IEV_INTEGER,	1,	&MainOption.EmuOption.Keypitch,		(void*)0},
+	{	"Settings",	"Emu.Volume",				IEV_INTEGER,	1,	&MainOption.EmuOption.Volume,		(void*)127},
 
 	// PianoRoll
-	{	"Settings",	"PRoll.RollHeight",			IEV_INTEGER,	1,	&MainOption.PRollOption.RollHeight,			9},
-	{	"Settings",	"PRoll.RollWidth",			IEV_INTEGER,	1,	&MainOption.PRollOption.RollWidth,			25},
-	{	"Settings",	"PRoll.NiagaraTouch",		IEV_INTEGER,	1,	&MainOption.PRollOption.NiagaraTouch,		TRUE},
-	{	"Settings",	"PRoll.DefaultGateTime",	IEV_INTEGER,	1,	&MainOption.PRollOption.DefaultGateTime,	500},
-	{	"Settings",	"PRoll.ScrollMag",			IEV_INTEGER,	1,	&MainOption.PRollOption.ScrollMag,			1},
-	{	"Settings",	"PRoll.ShowOctave",			IEV_INTEGER,	1,	&MainOption.PRollOption.ShowOctave,			FALSE},
-	{	"Settings",	"PRoll.ReadOnly",			IEV_INTEGER,	1,	&MainOption.PRollOption.ReadOnly,			FALSE},
+	{	"Settings",	"PRoll.RollHeight",			IEV_INTEGER,	1,	&MainOption.PRollOption.RollHeight,			(void*)9},
+	{	"Settings",	"PRoll.RollWidth",			IEV_INTEGER,	1,	&MainOption.PRollOption.RollWidth,			(void*)25},
+	{	"Settings",	"PRoll.NiagaraTouch",		IEV_INTEGER,	1,	&MainOption.PRollOption.NiagaraTouch,		(void*)TRUE},
+	{	"Settings",	"PRoll.DefaultGateTime",	IEV_INTEGER,	1,	&MainOption.PRollOption.DefaultGateTime,	(void*)500},
+	{	"Settings",	"PRoll.ScrollMag",			IEV_INTEGER,	1,	&MainOption.PRollOption.ScrollMag,			(void*)1},
+	{	"Settings",	"PRoll.ShowOctave",			IEV_INTEGER,	1,	&MainOption.PRollOption.ShowOctave,			(void*)FALSE},
+	{	"Settings",	"PRoll.ReadOnly",			IEV_INTEGER,	1,	&MainOption.PRollOption.ReadOnly,			(void*)FALSE},
 
 	// PianoRoll ColorSettings
-	{	"Settings",	"PRoll.BackColor",				IEV_INTEGER,	1,	&MainOption.PRollOption.BackColor,				RGB(255, 255, 255)},
-	{	"Settings",	"PRoll.NoteEdgeColor",			IEV_INTEGER,	1,	&MainOption.PRollOption.NoteEdgeColor,			RGB(128, 64, 128)},
-	{	"Settings",	"PRoll.NoteHilightEdgeColor",	IEV_INTEGER,	1,	&MainOption.PRollOption.NoteHilightEdgeColor,	RGB(255, 0, 0)},
-	{	"Settings",	"PRoll.NoteGridColor",			IEV_INTEGER,	1,	&MainOption.PRollOption.NoteGridColor,			RGB(220, 220, 220)},
-	{	"Settings",	"PRoll.NoteHilightGridColor",	IEV_INTEGER,	1,	&MainOption.PRollOption.NoteHilightGridColor,	RGB(240, 240, 240)},
-	{	"Settings",	"PRoll.NoteGridTextColor",		IEV_INTEGER,	1,	&MainOption.PRollOption.NoteGridTextColor,		RGB(192, 192, 192)},
-	{	"Settings",	"PRoll.TimeGridColor",			IEV_INTEGER,	1,	&MainOption.PRollOption.TimeGridColor,			RGB(220, 220, 220)},
-	{	"Settings",	"PRoll.TimeGridHilightColor",	IEV_INTEGER,	1,	&MainOption.PRollOption.TimeGridHilightColor,	RGB(192, 192, 192)},
-	{	"Settings",	"PRoll.DurationGridColor",		IEV_INTEGER,	1,	&MainOption.PRollOption.DurationGridColor,		RGB(240, 240, 240)},
-	{	"Settings",	"PRoll.GateGridColor",			IEV_INTEGER,	1,	&MainOption.PRollOption.GateGridColor,			RGB(240, 240, 240)},
-	{	"Settings",	"PRoll.TempoGridColor",			IEV_INTEGER,	1,	&MainOption.PRollOption.TempoGridColor,			RGB(160, 160, 220)},
-	{	"Settings",	"PRoll.DurationLineColor",		IEV_INTEGER,	1,	&MainOption.PRollOption.DurationLineColor,		RGB(128, 192, 128)},
-	{	"Settings",	"PRoll.GateLineColor",			IEV_INTEGER,	1,	&MainOption.PRollOption.GateLineColor,			RGB(128, 128, 192)},
+	{	"Settings",	"PRoll.BackColor",				IEV_INTEGER,	1,	&MainOption.PRollOption.BackColor,				(void*)RGB(255, 255, 255)},
+	{	"Settings",	"PRoll.NoteEdgeColor",			IEV_INTEGER,	1,	&MainOption.PRollOption.NoteEdgeColor,			(void*)RGB(128, 64, 128)},
+	{	"Settings",	"PRoll.NoteHilightEdgeColor",	IEV_INTEGER,	1,	&MainOption.PRollOption.NoteHilightEdgeColor,	(void*)RGB(255, 0, 0)},
+	{	"Settings",	"PRoll.NoteGridColor",			IEV_INTEGER,	1,	&MainOption.PRollOption.NoteGridColor,			(void*)RGB(220, 220, 220)},
+	{	"Settings",	"PRoll.NoteHilightGridColor",	IEV_INTEGER,	1,	&MainOption.PRollOption.NoteHilightGridColor,	(void*)RGB(240, 240, 240)},
+	{	"Settings",	"PRoll.NoteGridTextColor",		IEV_INTEGER,	1,	&MainOption.PRollOption.NoteGridTextColor,		(void*)RGB(192, 192, 192)},
+	{	"Settings",	"PRoll.TimeGridColor",			IEV_INTEGER,	1,	&MainOption.PRollOption.TimeGridColor,			(void*)RGB(220, 220, 220)},
+	{	"Settings",	"PRoll.TimeGridHilightColor",	IEV_INTEGER,	1,	&MainOption.PRollOption.TimeGridHilightColor,	(void*)RGB(192, 192, 192)},
+	{	"Settings",	"PRoll.DurationGridColor",		IEV_INTEGER,	1,	&MainOption.PRollOption.DurationGridColor,		(void*)RGB(240, 240, 240)},
+	{	"Settings",	"PRoll.GateGridColor",			IEV_INTEGER,	1,	&MainOption.PRollOption.GateGridColor,			(void*)RGB(240, 240, 240)},
+	{	"Settings",	"PRoll.TempoGridColor",			IEV_INTEGER,	1,	&MainOption.PRollOption.TempoGridColor,			(void*)RGB(160, 160, 220)},
+	{	"Settings",	"PRoll.DurationLineColor",		IEV_INTEGER,	1,	&MainOption.PRollOption.DurationLineColor,		(void*)RGB(128, 192, 128)},
+	{	"Settings",	"PRoll.GateLineColor",			IEV_INTEGER,	1,	&MainOption.PRollOption.GateLineColor,			(void*)RGB(128, 128, 192)},
 
-	{	"Settings",	"PRoll.CurrentPosColor",	IEV_INTEGER,	1,	&MainOption.PRollOption.CurrentPosColor,	RGB(255, 0, 0)},
-	{	"Settings",	"PRoll.StartPosColor",		IEV_INTEGER,	1,	&MainOption.PRollOption.StartPosColor,		RGB(0, 128, 0)},
-	{	"Settings",	"PRoll.EndPosColor",		IEV_INTEGER,	1,	&MainOption.PRollOption.EndPosColor,		RGB(128, 0, 128)},
+	{	"Settings",	"PRoll.CurrentPosColor",	IEV_INTEGER,	1,	&MainOption.PRollOption.CurrentPosColor,	(void*)RGB(255, 0, 0)},
+	{	"Settings",	"PRoll.StartPosColor",		IEV_INTEGER,	1,	&MainOption.PRollOption.StartPosColor,		(void*)RGB(0, 128, 0)},
+	{	"Settings",	"PRoll.EndPosColor",		IEV_INTEGER,	1,	&MainOption.PRollOption.EndPosColor,		(void*)RGB(128, 0, 128)},
 
-	{	"Settings",	"PRoll.SystemTextFontFace",		IEV_STRING,		1,	(int*)MainOption.PRollOption.SystemTextFontFace,		(DWORD)(LPCTSTR)"ＭＳ ゴシック",	LF_FACESIZE},
-	{	"Settings",	"PRoll.SystemTextFontSize",		IEV_INTEGER,	1,	&MainOption.PRollOption.SystemTextFontSize,				12},
-	{	"Settings",	"PRoll.SystemTextFontWeight",	IEV_INTEGER,	1,	&MainOption.PRollOption.SystemTextFontWeight,			FW_NORMAL},
+	{	"Settings",	"PRoll.SystemTextFontFace",		IEV_STRING,		1,	MainOption.PRollOption.SystemTextFontFace,		(void*)"ＭＳ ゴシック",	LF_FACESIZE},
+	{	"Settings",	"PRoll.SystemTextFontSize",		IEV_INTEGER,	1,	&MainOption.PRollOption.SystemTextFontSize,				(void*)12},
+	{	"Settings",	"PRoll.SystemTextFontWeight",	IEV_INTEGER,	1,	&MainOption.PRollOption.SystemTextFontWeight,			(void*)FW_NORMAL},
 
-	{	"Settings",	"PRoll.PosbarTextFontFace",		IEV_STRING,		1,	(int*)MainOption.PRollOption.PosbarTextFontFace,		(DWORD)(LPCTSTR)"ＭＳ ゴシック",	LF_FACESIZE},
-	{	"Settings",	"PRoll.PosbarTextFontSize",		IEV_INTEGER,	1,	&MainOption.PRollOption.PosbarTextFontSize,				12},
-	{	"Settings",	"PRoll.PosbarTextFontWeight",	IEV_INTEGER,	1,	&MainOption.PRollOption.PosbarTextFontWeight,			FW_NORMAL},
+	{	"Settings",	"PRoll.PosbarTextFontFace",		IEV_STRING,		1,	MainOption.PRollOption.PosbarTextFontFace,		(void*)"ＭＳ ゴシック",	LF_FACESIZE},
+	{	"Settings",	"PRoll.PosbarTextFontSize",		IEV_INTEGER,	1,	&MainOption.PRollOption.PosbarTextFontSize,				(void*)12},
+	{	"Settings",	"PRoll.PosbarTextFontWeight",	IEV_INTEGER,	1,	&MainOption.PRollOption.PosbarTextFontWeight,			(void*)FW_NORMAL},
 
-	{	"Settings",	"PRoll.NoteGridTextFontFace",	IEV_STRING,		1,	(int*)MainOption.PRollOption.NoteGridTextFontFace,	(DWORD)(LPCTSTR)"ＭＳ ゴシック",	LF_FACESIZE},
-	{	"Settings",	"PRoll.NoteGridTextFontSize",	IEV_INTEGER,	1,	&MainOption.PRollOption.NoteGridTextFontSize,		12},
-	{	"Settings",	"PRoll.NoteGridTextFontWeight",	IEV_INTEGER,	1,	&MainOption.PRollOption.NoteGridTextFontWeight,		FW_NORMAL},
-	{	"Settings",	"PRoll.NoteGridTextYOffset",	IEV_INTEGER,	1,	&MainOption.PRollOption.NoteGridTextYOffset,		0},
+	{	"Settings",	"PRoll.NoteGridTextFontFace",	IEV_STRING,		1,	MainOption.PRollOption.NoteGridTextFontFace,	(void*)"ＭＳ ゴシック",	LF_FACESIZE},
+	{	"Settings",	"PRoll.NoteGridTextFontSize",	IEV_INTEGER,	1,	&MainOption.PRollOption.NoteGridTextFontSize,		(void*)12},
+	{	"Settings",	"PRoll.NoteGridTextFontWeight",	IEV_INTEGER,	1,	&MainOption.PRollOption.NoteGridTextFontWeight,		(void*)FW_NORMAL},
+	{	"Settings",	"PRoll.NoteGridTextYOffset",	IEV_INTEGER,	1,	&MainOption.PRollOption.NoteGridTextYOffset,		(void*)0},
 
 	//==Template==
 	/*
@@ -189,7 +189,7 @@ typedef struct{
 	EVENT* selectedevent;
 } MAINWNDVAL;
 
-BOOL CALLBACK AboutDlgWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK AboutDlgWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	if(msg == WM_INITDIALOG)
 	{
@@ -205,6 +205,7 @@ BOOL CALLBACK AboutDlgWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		}
 
 		GetModuleFileName(NULL, exedir, sizeof(exedir));
+		for(LPTSTR p = exedir; *p; p++) if(*p == '\\') *p = '/';
 		*(LPTSTR)basename(exedir) = '\0';
 		addEndYen(exedir);
 
@@ -232,7 +233,7 @@ BOOL CALLBACK AboutDlgWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	return FALSE;
 }
 
-BOOL CALLBACK SmafSBDlgWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+INT_PTR CALLBACK SmafSBDlgWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	if(msg == WM_INITDIALOG)
 		return TRUE;
@@ -575,6 +576,8 @@ void setStatus(SMAF* smaf, BOOL emuplay, BOOL midiplay)
 void setEventListItem(int itemid, EVENT* e)
 {
 	TCHAR ts[256];
+
+	if (!e || !e->data) return;
 
 	wsprintf(ts, "%u", e->time);
 	ListView_SetItemText(hListWnd, itemid, 0, ts);
@@ -920,7 +923,7 @@ LRESULT CALLBACK StatusWndSub(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch(msg)
 	{
 	case WM_APP:
-		SetWindowLong(hWnd, GWL_USERDATA, GetWindowLong(hWnd, GWL_WNDPROC));
+		SetWindowLongPtr(hWnd, GWLP_USERDATA, GetWindowLongPtr(hWnd, GWLP_WNDPROC));
 		return 0;
 	case WM_LBUTTONDOWN:
 		if(wParam & MK_CONTROL)
@@ -1206,7 +1209,7 @@ LRESULT CALLBACK StatusWndSub(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 
-	return CallWindowProc((WNDPROC)GetWindowLong(hWnd, GWL_USERDATA), hWnd, msg, wParam, lParam);
+	return CallWindowProc((WNDPROC)GetWindowLongPtr(hWnd, GWLP_USERDATA), hWnd, msg, wParam, lParam);
 }
 
 LRESULT CALLBACK PRollWndSub(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -1216,7 +1219,7 @@ LRESULT CALLBACK PRollWndSub(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch(msg)
 	{
 	case WM_APP:
-		SetWindowLong(hWnd, GWL_USERDATA, GetWindowLong(hWnd, GWL_WNDPROC));
+		SetWindowLongPtr(hWnd, GWLP_USERDATA, GetWindowLongPtr(hWnd, GWLP_WNDPROC));
 		return 0;
 	case WM_KEYDOWN:
 	case WM_KEYUP:
@@ -1236,7 +1239,7 @@ LRESULT CALLBACK PRollWndSub(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 
-	return CallWindowProc((WNDPROC)GetWindowLong(hWnd, GWL_USERDATA), hWnd, msg, wParam, lParam);
+	return CallWindowProc((WNDPROC)GetWindowLongPtr(hWnd, GWLP_USERDATA), hWnd, msg, wParam, lParam);
 }
 
 LRESULT CALLBACK ListWndSub(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
@@ -1246,7 +1249,7 @@ LRESULT CALLBACK ListWndSub(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 	switch(msg)
 	{
 	case WM_APP:
-		SetWindowLong(hWnd, GWL_USERDATA, GetWindowLong(hWnd, GWL_WNDPROC));
+		SetWindowLongPtr(hWnd, GWLP_USERDATA, GetWindowLongPtr(hWnd, GWLP_WNDPROC));
 		return 0;
 	case WM_KEYDOWN:
 	case WM_KEYUP:
@@ -1261,7 +1264,7 @@ LRESULT CALLBACK ListWndSub(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		break;
 	}
 
-	return CallWindowProc((WNDPROC)GetWindowLong(hWnd, GWL_USERDATA), hWnd, msg, wParam, lParam);
+	return CallWindowProc((WNDPROC)GetWindowLongPtr(hWnd, GWLP_USERDATA), hWnd, msg, wParam, lParam);
 }
 
 void SaveConfig(BOOL saveAll)
@@ -1295,9 +1298,9 @@ void SaveConfig(BOOL saveAll)
 
 			if(IniEntries[i].type == IEV_INTEGER)
 			{
-				if(saveAll || found || IniEntries[i].def != *IniEntries[i].val)	// If changed
+				if(saveAll || found || (int)(uintptr_t)IniEntries[i].def != *(int*)IniEntries[i].val)	// If changed
 				{
-					wsprintf(ts, "%d", *IniEntries[i].val);
+					wsprintf(ts, "%d", *(int*)IniEntries[i].val);
 					WritePrivateProfileString(IniEntries[i].section, IniEntries[i].key, ts, inifile);
 				}
 			}
@@ -1325,9 +1328,9 @@ void SaveConfig(BOOL saveAll)
 
 				if(IniEntries[i].type == IEV_INTEGER)
 				{
-					if(saveAll || found || ((int*)IniEntries[i].def)[count] != IniEntries[i].val[count])	// If changed
+					if(saveAll || found || ((DWORD*)IniEntries[i].def)[count] != ((DWORD*)IniEntries[i].val)[count])	// If changed
 					{
-						wsprintf(ts, "%d", IniEntries[i].val[count]);
+						wsprintf(ts, "%d", ((DWORD*)IniEntries[i].val)[count]);
 						WritePrivateProfileString(IniEntries[i].section, kn, ts, inifile);
 					}
 				}
@@ -1411,7 +1414,7 @@ void CheckProblems(SMAF* smaf)
 
 void MainWnd_Create(HWND hWnd)
 {
-	MAINWNDVAL* mwv = (MAINWNDVAL*)GetWindowLong(hWnd, 0);
+	MAINWNDVAL* mwv = (MAINWNDVAL*)GetWindowLongPtr(hWnd, 0);
 
 	{
 		TCHAR fn[MAX_PATH];
@@ -1484,13 +1487,13 @@ void MainWnd_Create(HWND hWnd)
 			lvc.cx = 80;
 			ListView_InsertColumn(hListWnd, 3, &lvc);
 		}
-		ListWndSub(hListWnd, WM_APP, 0, 0), SetWindowLong(hListWnd, GWL_WNDPROC, (LONG)ListWndSub);
+		ListWndSub(hListWnd, WM_APP, 0, 0), SetWindowLongPtr(hListWnd, GWLP_WNDPROC, (LONG_PTR)ListWndSub);
 
 		hPRollWnd = CreateWindowEx(0, "MMFToolPRollWC", "", WS_CHILD | WS_VISIBLE | WS_HSCROLL | WS_VSCROLL, 0, 0, 0, 0, hWnd, NULL, GetModuleHandle(NULL), NULL);
-		PRollWndSub(hPRollWnd, WM_APP, 0, 0), SetWindowLong(hPRollWnd, GWL_WNDPROC, (LONG)PRollWndSub);
+		PRollWndSub(hPRollWnd, WM_APP, 0, 0), SetWindowLongPtr(hPRollWnd, GWLP_WNDPROC, (LONG_PTR)PRollWndSub);
 
 		hStatusWnd = CreateWindowEx(0, STATUSCLASSNAME, "", WS_CHILD | WS_VISIBLE | CCS_BOTTOM | SBARS_SIZEGRIP, 0, 0, 0, 0, hWnd, NULL, GetModuleHandle(NULL), NULL);
-		StatusWndSub(hStatusWnd, WM_APP, 0, 0), SetWindowLong(hStatusWnd, GWL_WNDPROC, (LONG)StatusWndSub);
+		StatusWndSub(hStatusWnd, WM_APP, 0, 0), SetWindowLongPtr(hStatusWnd, GWLP_WNDPROC, (LONG_PTR)StatusWndSub);
 
 		{
 			int pw[] = {0, 0};
@@ -1516,7 +1519,7 @@ void MainWnd_Create(HWND hWnd)
 
 BOOL MainWnd_ShiftOption(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	MAINWNDVAL* mwv = (MAINWNDVAL*)GetWindowLong(hWnd, 0);
+	MAINWNDVAL* mwv = (MAINWNDVAL*)GetWindowLongPtr(hWnd, 0);
 
 	switch(msg)
 	{
@@ -1788,7 +1791,7 @@ BOOL MainWnd_ShiftOption(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 void MainWnd_Command(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	MAINWNDVAL* mwv = (MAINWNDVAL*)GetWindowLong(hWnd, 0);
+	MAINWNDVAL* mwv = (MAINWNDVAL*)GetWindowLongPtr(hWnd, 0);
 
 	switch(HIWORD(wParam))
 	{
@@ -2128,7 +2131,7 @@ void MainWnd_Command(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 void MainWnd_PRollNotify(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	MAINWNDVAL* mwv = (MAINWNDVAL*)GetWindowLong(hWnd, 0);
+	MAINWNDVAL* mwv = (MAINWNDVAL*)GetWindowLongPtr(hWnd, 0);
 
 	switch(LOWORD(wParam))
 	{
@@ -2536,7 +2539,7 @@ LRESULT CALLBACK MainWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 			mwv->pch = 0;
 			mwv->selectedevent = NULL;
 
-			SetWindowLong(hWnd, 0, (LONG)mwv);
+			SetWindowLongPtr(hWnd, 0, (LONG_PTR)mwv);
 
 			// TODO: add error check!
 			MainWnd_Create(hWnd);
@@ -3437,9 +3440,9 @@ void ReadConfig(void)
 			{
 				GetPrivateProfileString(IniEntries[i].section, IniEntries[i].key, "", ts, sizeof(ts), inifile);
 				if(!lstrlen(ts))
-					*IniEntries[i].val = IniEntries[i].def;
+					*(int*)IniEntries[i].val = (int)(uintptr_t)IniEntries[i].def;
 				else
-					*IniEntries[i].val = strtoint(ts);
+					*(int*)IniEntries[i].val = strtoint(ts);
 			}
 			if(IniEntries[i].type == IEV_STRING)
 			{
@@ -3462,9 +3465,9 @@ void ReadConfig(void)
 					GetPrivateProfileString(IniEntries[i].section, kn, "", ts, sizeof(ts), inifile);
 
 					if(!lstrlen(ts))
-						IniEntries[i].val[count] = ((DWORD*)IniEntries[i].def)[count];
+						((DWORD*)IniEntries[i].val)[count] = ((DWORD*)IniEntries[i].def)[count];
 					else
-						IniEntries[i].val[count] = strtoint(ts);
+						((DWORD*)IniEntries[i].val)[count] = strtoint(ts);
 				}
 				if(IniEntries[i].type == IEV_STRING)
 				{
@@ -3478,7 +3481,7 @@ void ReadConfig(void)
 	return;
 }
 
-void WinMainCRTStartup(void)
+int __stdcall WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
 	LPCTSTR cmdline = skipspace(skipfname(GetCommandLine()));
 
@@ -3530,6 +3533,17 @@ void WinMainCRTStartup(void)
 	}
 
 	ReadConfig();
+
+	// Check for environment variable to override master volume
+	{
+		TCHAR envVol[32];
+		if (GetEnvironmentVariable("MMFTOOL_MASTER_VOLUME", envVol, sizeof(envVol)) > 0) {
+			int vol = strtoint(envVol);
+			if (vol >= 0 && vol <= 127) {
+				MainOption.EmuOption.Volume = vol;
+			}
+		}
+	}
 
 	if(!EmuInitialize())
 		ExitProcess(0);

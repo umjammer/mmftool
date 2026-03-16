@@ -4,7 +4,7 @@
 #define _WIN32_WINDOWS 0x0410
 
 #include <windows.h>
-#include "..\res\resource.h"
+#include "../res/resource.h"
 #include "runtime.h"
 #include "smaf.h"
 #include "main.h"
@@ -55,14 +55,14 @@ typedef struct{
 	// for Debugging?
 	BOOL ShowVisibleEventNum;
 }PROLLOPTIONSTRUCT;
-#define PROLLOPTION (*(PROLLOPTIONSTRUCT*)GetWindowLong(hWnd, 0))
+#define PROLLOPTION (*(PROLLOPTIONSTRUCT*)GetWindowLongPtr(hWnd, ))
 
 extern MAINOPTION MainOption;
 
 static void draw(HWND hWnd, HDC hdc, int width, int height)
 {
 	UINT scrx, scry;
-	PROLLOPTIONSTRUCT* PRollOption = (PROLLOPTIONSTRUCT*)GetWindowLong(hWnd, 0);
+	PROLLOPTIONSTRUCT* PRollOption = (PROLLOPTIONSTRUCT*)GetWindowLongPtr(hWnd, 0);
 	SMAF* smaf = PRollOption->smaf;	// faster faster...
 	UINT ProcessEventNum = 0;
 	UINT ProcessNoteEventNum = 0;
@@ -496,7 +496,7 @@ static void draw(HWND hWnd, HDC hdc, int width, int height)
 
 static void Resize(HWND hWnd)
 {
-	PROLLOPTIONSTRUCT* PRollOption = (PROLLOPTIONSTRUCT*)GetWindowLong(hWnd, 0);
+	PROLLOPTIONSTRUCT* PRollOption = (PROLLOPTIONSTRUCT*)GetWindowLongPtr(hWnd, 0);
 	// If you want window-client size, use GetClientRect instead of lParam.
 
 	SCROLLINFO si;
@@ -524,7 +524,7 @@ EVENT* EventHittest(HWND hWnd, UINT time, int note)
 {
 	EVENT* e;
 	EVENT* lastselect = NULL;
-	PROLLOPTIONSTRUCT* PRollOption = (PROLLOPTIONSTRUCT*)GetWindowLong(hWnd, 0);
+	PROLLOPTIONSTRUCT* PRollOption = (PROLLOPTIONSTRUCT*)GetWindowLongPtr(hWnd, 0);
 
 	for(e = PRollOption->smaf->events; e; e = e->next)
 	{
@@ -602,7 +602,7 @@ void SetEOS(SMAF* smaf)
 
 LRESULT CALLBACK PRollWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-	PROLLOPTIONSTRUCT* PRollOption = (PROLLOPTIONSTRUCT*)GetWindowLong(hWnd, 0);
+	PROLLOPTIONSTRUCT* PRollOption = (PROLLOPTIONSTRUCT*)GetWindowLongPtr(hWnd, 0);
 
 	switch(msg)
 	{
@@ -616,11 +616,11 @@ LRESULT CALLBACK PRollWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		}
 		break;
 	case WM_CREATE:
-		SetWindowLong(hWnd, 0, (LONG)halloc(sizeof(PROLLOPTIONSTRUCT)));
+		SetWindowLongPtr(hWnd, 0, (LONG_PTR)halloc(sizeof(PROLLOPTIONSTRUCT)));
 
 		//SendMessage(hWnd, WM_PROLL, PROLLWM_RELOADCONFIG, 0);
 		{
-			PROLLOPTIONSTRUCT* PRollOption = (PROLLOPTIONSTRUCT*)GetWindowLong(hWnd, 0);
+			PROLLOPTIONSTRUCT* PRollOption = (PROLLOPTIONSTRUCT*)GetWindowLongPtr(hWnd, 0);
 
 			// Settings
 			PRollOption->RollWidth = MainOption.PRollOption.RollWidth;
@@ -654,7 +654,7 @@ LRESULT CALLBACK PRollWndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 
 		break;
 	case WM_DESTROY:
-		hfree((void*)GetWindowLong(hWnd, 0));
+		hfree((void*)GetWindowLongPtr(hWnd, 0));
 		break;
 	case WM_MOUSEWHEEL:
 		if(GetAsyncKeyState(VK_CONTROL) & 0x8000)

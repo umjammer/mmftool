@@ -18,7 +18,7 @@ BOOL getFileVersion(VERSION* v, LPCTSTR modname)
 
 	GetFileVersionInfo(modname, 0, size, vi);
 	{
-		VS_FIXEDFILEINFO* ver;
+		LPVOID ver;
 
 		if(!VerQueryValue(vi, "\\", &ver, NULL))
 		{
@@ -27,10 +27,10 @@ BOOL getFileVersion(VERSION* v, LPCTSTR modname)
 		}
 
 		// name使い回し
-		v->major = HIWORD(ver->dwFileVersionMS);
-		v->minor = LOWORD(ver->dwFileVersionMS);
-		v->patch = HIWORD(ver->dwFileVersionLS);
-		v->build = LOWORD(ver->dwFileVersionLS);
+		v->major = HIWORD(((VS_FIXEDFILEINFO*)ver)->dwFileVersionMS);
+		v->minor = LOWORD(((VS_FIXEDFILEINFO*)ver)->dwFileVersionMS);
+		v->patch = HIWORD(((VS_FIXEDFILEINFO*)ver)->dwFileVersionLS);
+		v->build = LOWORD(((VS_FIXEDFILEINFO*)ver)->dwFileVersionLS);
 	}
 
 	hfree(vi);
