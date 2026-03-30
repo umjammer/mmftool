@@ -3,6 +3,7 @@
 // for Win98 or later.
 #define _WIN32_WINDOWS 0x0410
 
+#include <stdio.h>
 #include <windows.h>
 #include "../res/resource.h"
 #include "runtime.h"
@@ -224,6 +225,12 @@ static void draw(HWND hWnd, HDC hdc, int width, int height)
 
 				ProcessNoteEventNum++;
 
+				// if ((e->status & 0xF0) == 0x90) {
+				// 	fprintf(stdout, "%u, Note_on_c, %u, %u, %u\n", e->time, e->status & 0x0F, e->data[0], e->data[1]);
+				// } else if ((e->status & 0xF0) == 0x80) {
+				// 	fprintf(stdout, "%u, Note_off_c, %u, %u, %u\n", e->time, e->status & 0x0F, e->data[0], e->data[1]);
+				// }
+
 				if((UINT)((scrx + width) * PRollOption->RollWidth) < e->time)	// Over. no draw needed any more.
 					break;
 
@@ -231,6 +238,10 @@ static void draw(HWND hWnd, HDC hdc, int width, int height)
 					continue;
 
 				gtime = getGateTime(e);
+
+				// if ((e->status & 0xF0) == 0x90) {
+				// 	fprintf(stdout, "%u, Note_off_c, %u, %u, 0\n", e->time + gtime, e->status & 0x0F, e->data[0]);
+				// }
 
 				if(e->time + gtime < scrx * PRollOption->RollWidth)
 					continue;
