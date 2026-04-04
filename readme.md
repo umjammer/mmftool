@@ -2,6 +2,10 @@
 
 mmfplayer powered by M5_Emu*.dll for cross compiling on macos.
 
+### Goal
+
+run on jDosbox
+
 ## Install
 
 ### build

@@ -17,14 +17,25 @@ OBJECTS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(SOURCES))
 RESOURCE_OBJ = $(OBJDIR)/res.o
 
 TARGET = mmftool.exe
+CUI_TARGET = mmftoolc.exe
 
 LIBS = -lkernel32 -luser32 -lgdi32 -lwinspool -lcomdlg32 -ladvapi32 -lshell32 \
        -lole32 -loleaut32 -luuid -lodbc32 -lodbccp32 -lwinmm -lversion -lcomctl32
 
-all: $(TARGET)
+CUI_LDFLAGS = -mconsole -static-libgcc -static-libstdc++ $(CRTFLAGS)
+CUI_SOURCES = $(SRCDIR)/bit.c $(SRCDIR)/console.c $(SRCDIR)/cuimode.c \
+              $(SRCDIR)/emusmw5.c $(SRCDIR)/exlayer.c $(SRCDIR)/maincrt.c \
+              $(SRCDIR)/runtime.c $(SRCDIR)/smaf.c $(SRCDIR)/version.c \
+              $(SRCDIR)/voice.c
+CUI_OBJECTS = $(patsubst $(SRCDIR)/%.c, $(OBJDIR)/%.o, $(CUI_SOURCES))
+
+all: $(TARGET) $(CUI_TARGET)
 
 $(TARGET): $(OBJECTS) $(RESOURCE_OBJ)
 	$(CC) $(LDFLAGS) -o $@ $^ $(LIBS)
+
+$(CUI_TARGET): $(CUI_OBJECTS)
+	$(CC) $(CUI_LDFLAGS) -o $@ $^ $(LIBS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
